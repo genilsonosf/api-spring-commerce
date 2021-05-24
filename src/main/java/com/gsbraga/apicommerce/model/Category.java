@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name="categories")
@@ -21,8 +19,13 @@ public class Category implements Serializable {
     @Column(name ="category_name")
     private String name;
 
-    @OneToMany(mappedBy="category")
-    private Set<Product> products = new HashSet<Product>();
+    @OneToMany(
+            mappedBy="category",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonIgnore
+    private List<Product> products = new ArrayList<>();
 
     public Category() {
 
@@ -50,10 +53,19 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-//    @JsonIgnore
-//    public Set<Product> getProducts() {
-//       return products;
-//    }
+    public void addProduct(Product product) {
+        products.add(product);
+        product.setCategory(this);
+    }
+
+    public void removeProduct(Product product) {
+        products.remove(product);
+        product.setCategory(null);
+    }
+
+    public List<Product> getProducts() {
+       return products;
+    }
 
     @Override
     public boolean equals(Object o) {

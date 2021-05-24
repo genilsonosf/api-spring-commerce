@@ -1,6 +1,6 @@
 package com.gsbraga.apicommerce.controllers;
 
-import com.gsbraga.apicommerce.exceptions.services.ProductService;
+import com.gsbraga.apicommerce.services.ProductService;
 import com.gsbraga.apicommerce.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

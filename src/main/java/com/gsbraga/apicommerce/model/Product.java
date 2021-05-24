@@ -15,12 +15,12 @@ public class Product implements Serializable {
     @Column(name ="product_id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="category_id", nullable=false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="category_id", referencedColumnName="category_id", nullable=false)
     private Category category;
 
-    @ManyToOne
-    @JoinColumn(name="brand_id", nullable=false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="brand_id", referencedColumnName="brand_id", nullable=false)
     private Brand brand;
 
     @Column(name ="product_name")

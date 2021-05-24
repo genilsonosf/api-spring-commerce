@@ -1,4 +1,4 @@
-package com.gsbraga.apicommerce.exceptions.services;
+package com.gsbraga.apicommerce.services;
 
 import com.gsbraga.apicommerce.model.Product;
 import com.gsbraga.apicommerce.repositories.ProductRepository;

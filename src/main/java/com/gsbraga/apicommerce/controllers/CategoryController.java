@@ -1,6 +1,7 @@
 package com.gsbraga.apicommerce.controllers;
 
-import com.gsbraga.apicommerce.exceptions.services.CategoryService;
+import com.gsbraga.apicommerce.model.Product;
+import com.gsbraga.apicommerce.services.CategoryService;
 import com.gsbraga.apicommerce.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,12 @@ public class CategoryController {
     public ResponseEntity<Category> findById(@PathVariable Long id) {
         Category obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @GetMapping(value = "/{category}/products")
+    public ResponseEntity<List<Product>> findProductsCategoryById(@PathVariable Long category) {
+        Category obj = service.findById(category);
+        return ResponseEntity.ok().body(obj.getProducts());
     }
 
 }
