@@ -25,6 +25,23 @@ public class Store implements Serializable {
     @JsonIgnore
     private List<Stock> stocks = new ArrayList<>();
 
+    @OneToMany(
+            mappedBy="store",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonIgnore
+    private List<Staff> staffs = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy="store",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonIgnore
+    private List<Order> orders = new ArrayList<>();
+
+
     @Column(name ="store_name")
     private String name;
 
@@ -112,5 +129,9 @@ public class Store implements Serializable {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }

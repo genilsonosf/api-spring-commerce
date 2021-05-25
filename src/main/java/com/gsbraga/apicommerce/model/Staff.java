@@ -1,7 +1,11 @@
 package com.gsbraga.apicommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="customers")
@@ -28,10 +32,20 @@ public class Staff implements Serializable {
     @Column(name ="active")
     private Boolean active;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="store_id", referencedColumnName="store_id", nullable=false)
     private Store store;
 
     @Column(name ="manager_id")
     private Staff staff;
+
+    @OneToMany(
+            mappedBy="staff",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonIgnore
+    private List<Order> orders = new ArrayList<>();
 
     public Staff() {
 
@@ -99,5 +113,9 @@ public class Staff implements Serializable {
 
     public void setStaff(Staff staff) {
         this.staff = staff;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }

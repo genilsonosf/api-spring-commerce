@@ -27,19 +27,27 @@ public class Order implements Serializable {
     @JoinColumn(name="customer_id", referencedColumnName="customer_id", nullable=false)
     private Customer customer;
 
+    @Column(name ="order_status")
     private Integer orderStatus;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    @Column(name ="order_date")
     private Instant orderDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    @Column(name ="require_date")
     private Instant requiredDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    @Column(name ="shipped_date")
     private Instant shippedDate;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="store_id", referencedColumnName="store_id", nullable=false)
     private Store store;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="staff_id", referencedColumnName="staff_id", nullable=false)
     private Staff staff;
 
     public Order(Long id, Customer customer, OrderStatus orderStatus) {

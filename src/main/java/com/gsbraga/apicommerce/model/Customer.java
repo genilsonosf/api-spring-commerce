@@ -135,7 +135,7 @@ public class Customer implements Serializable {
         order.setCustomer(null);
     }
 
-    public List<Order> getOrder() {
+    public List<Order> getOrders() {
         return orders;
     }
 }

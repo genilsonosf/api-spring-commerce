@@ -50,7 +50,7 @@ public class ProductControllerTest {
 
     @Test
     public void testRequestError() throws Exception{
-        String url = "/products/5";
+        String url = "/category/500";
         this.mvc.perform(get(url))
                 .andExpect(status().is4xxClientError());
     }
