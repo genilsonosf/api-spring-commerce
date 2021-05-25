@@ -17,24 +17,24 @@ import java.util.Optional;
 public class CategoryService {
 
     @Autowired
-    private CategoryRepository categoryRepository;
+    private CategoryRepository repository;
 
     public List<Category> findAll() {
-        return categoryRepository.findAll();
+        return repository.findAll();
     }
 
     public Category findById(Long id) {
-        Optional<Category> obj = categoryRepository.findById(id);
+        Optional<Category> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ControllerNotFoundException(id));
     }
 
     public Category insert(Category obj) {
-        return categoryRepository.save(obj);
+        return repository.save(obj);
     }
 
     public void delete(Long id) {
         try {
-            categoryRepository.deleteById(id);
+            repository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new ControllerNotFoundException(id);
         } catch (DataIntegrityViolationException e) {
@@ -44,9 +44,9 @@ public class CategoryService {
 
     public Category update(Long id, Category obj) {
         try {
-            Category entity = categoryRepository.getById(id);
+            Category entity = repository.getById(id);
             updateData(entity, obj);
-            return categoryRepository.save(entity);
+            return repository.save(entity);
         } catch (EntityNotFoundException e) {
             throw new ControllerNotFoundException(id);
         }
