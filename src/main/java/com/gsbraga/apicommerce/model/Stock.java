@@ -19,10 +19,18 @@ public class Stock implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
 
+    @Column(nullable = false)
     private Integer quantity;
 
     public Stock() {
 
+    }
+
+    public Stock(Long id, Store store, Product product, Integer quantity) {
+        this.id = id;
+        this.store = store;
+        this.product = product;
+        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -55,5 +63,9 @@ public class Stock implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Integer getQuantityAvaliable() {
+        return quantity;
     }
 }

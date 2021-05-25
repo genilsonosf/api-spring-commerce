@@ -26,7 +26,7 @@ public class Customer implements Serializable {
     @Column(name ="phone")
     private String phone;
 
-    @Column(name ="email")
+    @Column(name ="email", unique = true)
     private String email;
 
     @Column(name ="street")
@@ -51,6 +51,18 @@ public class Customer implements Serializable {
 
     public Customer() {
 
+    }
+
+    public Customer(Long id, String firstName, String lastName, String phone, String email, String street, String city, String state, String zipCode) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
     }
 
     public Long getId() {

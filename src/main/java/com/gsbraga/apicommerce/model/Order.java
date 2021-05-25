@@ -50,9 +50,16 @@ public class Order implements Serializable {
     @JoinColumn(name="staff_id", referencedColumnName="staff_id", nullable=false)
     private Staff staff;
 
-    public Order(Long id, Customer customer, OrderStatus orderStatus) {
+    public Order() {
+
+    }
+
+    public Order(Long id, Customer customer, Instant orderDate, OrderStatus orderStatus, Staff staff, Store store) {
         this.id = id;
         this.customer = customer;
+        this.staff = staff;
+        this.store = store;
+        this.orderDate = orderDate;
         setOrderStatus(orderStatus);
     }
 

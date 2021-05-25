@@ -48,7 +48,7 @@ public class Store implements Serializable {
     @Column(name ="phone")
     private String phone;
 
-    @Column(name ="email")
+    @Column(name ="email", nullable = true)
     private String email;
 
     @Column(name ="street")
@@ -65,6 +65,11 @@ public class Store implements Serializable {
 
     public Store() {
 
+    }
+
+    public Store(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Long getId() {
@@ -133,5 +138,9 @@ public class Store implements Serializable {
 
     public List<Order> getOrders() {
         return orders;
+    }
+
+    public List<Stock> getStocks() {
+        return stocks;
     }
 }

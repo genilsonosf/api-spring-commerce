@@ -24,10 +24,6 @@ public class StockService {
         return repository.findAll();
     }
 
-    public Stock findById(long id) {
-        return repository.findById(id).get();
-    }
-
     public Stock findById(Long id) {
         Optional<Stock> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ControllerNotFoundException(id));

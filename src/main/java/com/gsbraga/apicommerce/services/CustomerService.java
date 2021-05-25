@@ -1,7 +1,6 @@
 package com.gsbraga.apicommerce.services;
 
 import com.gsbraga.apicommerce.model.Customer;
-import com.gsbraga.apicommerce.model.Customer;
 import com.gsbraga.apicommerce.repositories.CustomerRepository;
 import com.gsbraga.apicommerce.services.exceptions.ControllerNotFoundException;
 import com.gsbraga.apicommerce.services.exceptions.DatabaseException;

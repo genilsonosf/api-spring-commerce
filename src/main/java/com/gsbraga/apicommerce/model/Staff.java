@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="customers")
+@Table(name="staffs")
 public class Staff implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,7 @@ public class Staff implements Serializable {
     @Column(name ="last_name")
     private String lastName;
 
-    @Column(name ="email")
+    @Column(name ="email", unique = true)
     private String email;
 
     @Column(name ="phone")
@@ -36,8 +36,12 @@ public class Staff implements Serializable {
     @JoinColumn(name="store_id", referencedColumnName="store_id", nullable=false)
     private Store store;
 
-    @Column(name ="manager_id")
-    private Staff staff;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id", referencedColumnName = "staff_id", updatable = false, insertable = false)
+    private Staff manager;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "manager")
+    private List<Staff> subStaffs;
 
     @OneToMany(
             mappedBy="staff",
@@ -49,6 +53,15 @@ public class Staff implements Serializable {
 
     public Staff() {
 
+    }
+
+    public Staff(Long id, String firstName, String lastName, String email, Boolean active, Store store) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.active = active;
+        this.store = store;
     }
 
     public Long getId() {
@@ -107,12 +120,20 @@ public class Staff implements Serializable {
         this.store = store;
     }
 
-    public Staff getStaff() {
-        return staff;
+    public Staff getManager() {
+        return manager;
     }
 
-    public void setStaff(Staff staff) {
-        this.staff = staff;
+    public void setManager(Staff manager) {
+        this.manager = manager;
+    }
+
+    public List<Staff> getSubStaff() {
+        return subStaffs;
+    }
+
+    public void setSubStaffs(Staff staff) {
+        manager.setSubStaffs(staff);
     }
 
     public List<Order> getOrders() {
