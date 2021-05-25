@@ -1,9 +1,10 @@
 package com.gsbraga.apicommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name="products")
@@ -22,6 +23,17 @@ public class Product implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="brand_id", referencedColumnName="brand_id", nullable=false)
     private Brand brand;
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
+
+    @OneToMany(
+            mappedBy="product",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonIgnore
+    private List<Stock> stocks = new ArrayList<>();
 
     @Column(name ="product_name")
     private String name;
